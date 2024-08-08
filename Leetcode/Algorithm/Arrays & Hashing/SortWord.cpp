@@ -9,9 +9,7 @@ public:
     std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
         std::unordered_map<std::string, std::vector<std::string>> myMap;
         std::string word;
-
         std::vector<std::vector<std::string>> output;
-        std::vector<std::string> words;
 
         for(const auto &str : strs) {
             word = str;
