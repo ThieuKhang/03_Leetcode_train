@@ -110,7 +110,8 @@
     "text_encoding": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "sstream": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "editor.autoClosingBrackets": "always",
