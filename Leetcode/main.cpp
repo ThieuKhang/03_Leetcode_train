@@ -25,12 +25,18 @@ public:
             if(isOpen(c)) {
                 myStack.push(c);
                 continue;
+            } else {
+                if(myStack.empty()) {
+                    return false;
+                } else if(myStack.top() != closeToOpen(c)) {
+                    return false;
+                } else
+                    myStack.pop(); 
+                    continue;
             }
-            if(myStack.top() != closeToOpen(c)) {
-                return false;
-            } else
-                myStack.pop(); 
-                continue;
+        }
+        if(!myStack.empty()) {
+            return false;
         }
         return true;
     }
@@ -39,8 +45,8 @@ public:
 
 int main() {
     Solution Dec19;
-    std::string s = "(]";
+    std::string s = "}}";
     bool outPut = Dec19.isValid(s);
-    std::cout << outPut << std::endl;
+    std::cout << s << " " <<  outPut << std::endl;
     return 0;
 }

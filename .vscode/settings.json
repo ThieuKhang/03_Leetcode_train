@@ -113,6 +113,6 @@
     "map": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
-  "editor.autoClosingBrackets": "never",
-  "editor.autoClosingQuotes": "never"
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always"
 }
