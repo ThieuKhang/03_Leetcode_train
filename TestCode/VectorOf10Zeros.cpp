@@ -6,7 +6,7 @@ int main() {
     std::vector<int> vec(10, 0);
 
     // Optional: Print the elements to verify
-    for (int i = 0; i < vec.size(); ++i) {
+    for (size_t i = 0; i < vec.size(); ++i) {
         std::cout << vec[i] << " ";
     }
     std::cout << std::endl;
