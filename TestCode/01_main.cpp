@@ -1,83 +1,56 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#include <stack>
 #include <cmath>
+#include <algorithm>
+
+using namespace std;
 
 class Solution {
 public:
-    bool isConvertibleToInt(const std::string& str) {
-        try {
-            std::size_t pos;
-            std::stoi(str, &pos);
-            // Check if the entire string was used in the conversion
-            return pos == str.length();
-        } catch (std::invalid_argument& e) {
-            return false; // Not a valid integer
-        } catch (std::out_of_range& e) {
-            return false; // Out of int range
-        }
+    int calculate(const vector<int>& piles, int pointer) {
+        return -1;
     }
-    void add(std::stack<int>& myStack) {
-        if (myStack.size() < 2) return; // Ensure there are enough elements
-        int b = myStack.top(); myStack.pop();
-        int a = myStack.top(); myStack.pop();
-        myStack.push(a + b);
+    int findInGap(const vector<int>& piles, int head, int tail) {
+        return -1;
     }
+    int minEatingSpeed(vector<int>& piles, int h) {
+        if(piles.empty()) return -1;
 
-    void minus(std::stack<int>& myStack) {
-        if (myStack.size() < 2) return;
-        int b = myStack.top(); myStack.pop();
-        int a = myStack.top(); myStack.pop();
-        myStack.push(a - b);
-    }
-
-    void times(std::stack<int>& myStack) {
-        if (myStack.size() < 2) return;
-        int b = myStack.top(); myStack.pop();
-        int a = myStack.top(); myStack.pop();
-        myStack.push(a * b);
-    }
-
-    void divide(std::stack<int>& myStack) {
-        if (myStack.size() < 2) return;
-        int b = myStack.top(); myStack.pop();
-        int a = myStack.top(); myStack.pop();
-        if (b == 0) {
-            myStack.push(-1); // Handle divide-by-zero by pushing -1
-        } else {
-            double result = static_cast<double>(a) / b;
-            myStack.push(static_cast<int>(std::round(result))); // Push rounded result
-        }
-    }
-    int evalRPN(std::vector<std::string>& tokens) {
-        std::stack<int> myStack;
-        for(const auto& token : tokens) {
-                if (token == "+") {
-                    add(myStack);
-                } else if (token == "-") {
-                    minus(myStack);
-                } else if (token == "*") {
-                    times(myStack);
-                } else if (token == "/") {
-                    divide(myStack);
-                } else {
-                    if (isConvertibleToInt(token)) {
-                        int num = std::stoi(token);
-
-                        if (!myStack.empty() && myStack.top() == -1) return 0;
-                        myStack.push(num);
-                    }
-                }
+        sort(piles.begin(), piles.end());                 
+                                           
+        int head = 0;                                                                                                                                        
+        int tail = piles.size() - 1;            
+        int mid = (tail + head)/2;                            
+                                                                
+        int time = -1;
+          
+        while(true) {                                                                                                                                               
+            time = calculate(piles, piles[mid]);                                           
+            if(time < h) {
+                tail = mid;
+                mid = (tail + head)/2; 
+            } else if(time > h) {
+                head = mid;
+                mid = (tail + head)/2 + 1; 
+            } else if(time == h) {
+                return mid;                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            } else {
+                return findInGap(piles, head, tail);
             }
-        return myStack.top();
+        }
+        
+
+        return -1;
     }
 };
 
 int main() {
-    Solution Nov624;
-    std::vector<std::string> tokens = {"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
-    int output = Nov624.evalRPN(tokens);
-    std::cout << output << std::endl;
+    Solution Dec724;
+    vector<int> piles {5,6,7,8,9};
+    int time = 5;
+    int output = Dec724.minEatingSpeed(piles, time);
+
+    cout << output << endl;
+
     return 0;
 }
